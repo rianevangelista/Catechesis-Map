@@ -96,3 +96,16 @@ main h1 {
         margin: initial;
     }
 }
+
+/* mobile version */
+@media (max-width: 640px) {
+    h1.animate-up {
+        font-size: 6rem;
+    }
+
+    p.animate-up {
+        font-size: 2.1rem;
+        line-height: 2.4rem;   
+    }
+
+}
