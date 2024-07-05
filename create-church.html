@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <!-- META TAGS -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- ICON -->
+        <link rel="icon" href="./assets/catechesis-favicon.ico">
+        
+        <!-- TITLE -->
+        <title>Adicionar Igreja</title>
+
+        <!-- STYLES CSS -->
+        <link rel="stylesheet" type="text/css" href="./css/map.css">
+        <link rel="stylesheet" type="text/css" href="./css/form.css">
+        <link rel="stylesheet" type="text/css" href="./css/styles.css">
+        <link rel="stylesheet" type="text/css" href="./css/buttons.css">
+        <link rel="stylesheet" type="text/css" href="./css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="./css/animations.css">
+        <link rel="stylesheet" type="text/css" href="./css/page-create-church.css">
+
+        <!-- LEAFLET JS MAP -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+        <!-- GOOGLE FONTS -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="page-create-church">
+            <aside class="animate-right sidebar">
+                <img src="./assets/map-marker.svg" alt="Logotipo Catechesis">
+                <footer>
+                    <button onclick="history.back()">
+                        <img src="./assets/back.svg" alt="Voltar">
+                    </button>
+                </footer>
+            </aside>
+
+            <main class="animate-appear with-sidebar">
+                <form action="save-church" method="post" onsubmit="validate(event)">
+                    <fieldset>
+                        <legend>Dados</legend>
+
+                        <div class="map-container">
+                            <div id="map"></div>
+                            <input type="hidden" name="lat">
+                            <input type="hidden" name="lng">
+
+                            <footer>
+                                <a href="#" id="select-point">
+                                    Clique no mapa para adicionar a localização
+                                </a>
+                            </footer> 
+                        </div>
+
+                        <div class="input-block">
+                            <label for="name">Nome</label>
+                            <input id="name" name="name" required>
+                        </div>
+
+                        <div class="input-block">
+                            <label for="about">
+                                Sobre <span>Máximo de 300 caracteres</span>
+                            </label>
+                            <textarea name="about" id="about" required></textarea>
+                        </div>
+
+                        <div class="input-block">
+                            <label for="whatsapp">Número de whatsapp</label>
+                            <input id="whatsapp" name="whatsapp" required>
+                        </div>
+
+                        <div class="input-block images">
+                            <label for="images">Foto</label>
+
+                            <div class="images-upload" id="images">
+                                <div class="new-upload">
+                                    <input 
+                                        name="images"
+                                        placeholder="Cole o link da foto aqui"
+                                        type="url" 
+                                    />
+                                    <span onclick="deleteField(event)">
+                                        <img src="/assets/remove-file.svg" alt="Remover Foto">
+                                    </span>
+                                </div>
+                            </div>
+
+                            <button onclick="addPhotoField()" type="button">
+                                <img src="./assets/add-file.svg" alt="Nova imagem">
+                            </button>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Visitação</legend>
+
+                        <div class="input-block">
+                            <label for="instructions">Instruções</label>
+                            <textarea name="instructions" id="instructions" required></textarea>
+                        </div>
+
+                        <div class="input-block">
+                            <label for="opening_hours">Horário das missas</label>
+                            <input id="opening_hours" name="opening_hours" required>
+                        </div>
+
+                        <div class="input-block">
+                            <label for="open_on_weekends">Atende fim de semana?</label>
+                            <input 
+                                type="hidden"
+                                id="open_on_weekends"
+                                name="open_on_weekends"
+                                value="1"
+                                required
+                            >
+
+                            <div class="button-select">
+                                <button data-value="1"
+                                    onclick="toggleSelect(event)"
+                                    type="button"
+                                    class="active">Sim</button>
+                                <button data-value="0"
+                                    onclick="toggleSelect(event)"
+                                    type="button"
+                                    >Não</button>
+                            </div>
+                            <button type="submit" class="primary-button">Confirmar</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </main>
+        </div>
+        <script src="./js/page-create-church.js"></script>
+    </body>
+</html>

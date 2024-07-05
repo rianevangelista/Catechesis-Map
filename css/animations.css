@@ -2,7 +2,7 @@
 @keyframes up {
     from {
         opacity: 0;
-        transform: translateY(16%);
+        transform: translateY(16px);
     }
 
     to {
