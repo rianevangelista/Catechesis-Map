@@ -12,7 +12,7 @@ server
     .use(express.urlencoded({ extended: true }))
 
     // utilizando os arquivos estáticos
-    .use(express.static(__dirname + '../../' + 'public'))
+    .use(express.static(__dirname + '../../' + '/public'))
 
     // configurar template engine
     .set('views', path.join(__dirname, "views"))
