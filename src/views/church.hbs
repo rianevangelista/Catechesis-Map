@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <!-- META TAGS -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- ICON -->
+        <link rel="icon" href="./assets/catechesis-favicon.ico">
+        
+        <!-- TITLE -->
+        <title>{{ church.name }} | Catechesis Map</title>
+
+        <!-- STYLES CSS -->
+        <link rel="stylesheet" type="text/css" href="./css/map.css">
+        <link rel="stylesheet" type="text/css" href="./css/styles.css">
+        <link rel="stylesheet" type="text/css" href="./css/buttons.css">
+        <link rel="stylesheet" type="text/css" href="./css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="./css/animations.css">
+        <link rel="stylesheet" type="text/css" href="./css/page-church.css">
+
+        <!-- LEAFLET JS MAP -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+        <!-- GOOGLE FONTS -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="page-church">
+            <aside class="animate-right sidebar">
+                <img src="./assets/map-marker.svg" alt="Logotipo Catechesis">
+                <footer>
+                    <button onclick="history.back()">
+                        <img src="./assets/back.svg" alt="Voltar">
+                    </button>
+                </footer>
+            </aside>
+
+            <main class="animate-appear with-sidebar">
+                <div class="church-details">
+                    <img src="{{church.firstImage}}" alt="{{ church.name }}">
+
+                    <div class="images">
+                        {{#each church.images}}
+                        <button onclick="selectImage(event)" class="active" type="button">
+                            <img src="{{this}}" alt="{{ church.name }}">
+                        </button>
+                        {{/each}}
+                        
+                    </div>
+                        
+                    <div class="church-details-content">
+                        <h1>{{ church.name }}</h1>
+
+                        <p>{{ church.about }}</p>
+
+                        <div class="map-container">
+                            <div id="map"></div>
+                            <span
+                                data-lat="{{ church.lat }}"
+                                data-lng="{{ church.lng }}">
+                            </span>
+                            <footer>
+                                <a 
+                                    target="_blank"
+                                    href="https://maps.google.com/mobile?q={{ church.lat }},{{ church.lng }}&z=15">Ver rotas no Google Maps</a>
+                            </footer>
+                        </div>
+                            
+                        <hr />
+
+                        <h2>Mais informações</h2>
+
+                        <p>Confira os nossos horários de funcionamento</p>
+
+                        <div class="open-details">
+                            <div class="hour">
+                                <img src="/assets/horarios.svg" alt="Horários de Missa">
+                                {{ church.opening_hours }}
+                            </div>
+
+                            {{#if church.open_on_weekends}}
+                                <div class="open-on-weekends open">
+                                    <img src="./assets/info-green.svg" alt="Informações">
+                                    Temos confissões aos finais de semana
+                                </div>
+                            {{else}}
+                                <div class="open-on-weekends closed">
+                                    <img src="./assets/info-red.svg" alt="Informações">
+                                    Não temos confissões aos finais de semana
+                                </div>
+                            {{/if}}
+                        </div>
+
+                        <a href="https://api.whatsapp.com/send?l=pt_BR&phone={{church.whatsapp}}&text=Olá! Gostaria de me informar sobre os dias e horários de confissão no(a) {{church.name}}" 
+                        target="_blank"
+                        class="primary-button" type="button">
+                            <img src="./assets/whatsapp.svg" alt="whatsapp">
+                            Entrar em contato
+                        </a>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <script src="./js/page-church.js"></script>
+    </body>
+</html>
